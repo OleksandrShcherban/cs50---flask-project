@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy
+{% endblock %}
+
+{% block main %}
+    <form action="/buy" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus="" class="form-control mx-auto w-auto" name="symbol" placeholder="Symbol"
+                type="text"  pattern="[0-9a-zA-Z]+">
+        </div>
+        <div class="mb-3">
+            <input autocomplete="off" class="form-control mx-auto w-auto" min="1" name="shares" placeholder="Shares"
+                type="number"  pattern="[0-9]+">
+        </div>
+        <button class="btn btn-primary" type="submit">Buy</button>
+    </form>
+    <ul id="search-output"></ul>
+    <script>
+        let search = document.querySelector('input');
+        search.addEventListener('input', function () {
+            document.querySelector('#search-output').innerHTML = "...Searching...";
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "/q");
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    console.log(xhr.status);
+                    console.log(xhr.responseText);
+                    document.querySelector('#search-output').innerHTML = xhr.responseText;
+                }
+            };
+            let symbol = search.value;
+            console.log(symbol)
+            xhr.send(symbol);
+        });
+    </script>
+{% endblock %}
