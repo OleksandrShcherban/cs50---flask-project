@@ -21,7 +21,7 @@
                 <td class="text-start">{{ record['symbol'] }}</td>
                 <td class="text-end">{{ record['shares'] }}</td>
                 <td class="text-end">{{ record['price'] | usd }}</td>
-                <td class="text-end">{{ record['datetime'] }}</td>
+                <td class="text-end">{{ record['datetime'] | timeformat }}</td>
             </tr>
             {% endfor %}
 
