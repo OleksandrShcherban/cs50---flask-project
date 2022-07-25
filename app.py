@@ -49,7 +49,7 @@ def index():
     cash = db.execute("SELECT cash FROM users WHERE id = (?)",
                       session["user_id"])[0]['cash']
     portfolio = db.execute(
-        "SELECT symbol, SUM(shares) AS sum, price FROM operations WHERE user_id = (?) GROUP BY symbol", session["user_id"])
+        "SELECT symbol, price, SUM(shares) AS sum FROM operations WHERE user_id = (?) GROUP BY symbol", session["user_id"])
     names = {}
     for record in portfolio:
         names[record['symbol']] = lookup(record['symbol'])['name']
