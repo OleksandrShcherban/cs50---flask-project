@@ -70,7 +70,7 @@ def timeformat(value):
     print("==============================")
     t = (2009, 2, 17, 17, 3, 38, 1, 48, 0)
     t = time.mktime(t)
-    print("t = " + t)
+    print(t)
     print("value = " + value)
     print (time.strftime("%b %d %Y %H:%M:%S", (t)))
     print (time.strftime("%b %d %Y %H:%M:%S", (value)))
