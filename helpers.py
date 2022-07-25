@@ -67,4 +67,4 @@ def usd(value):
     return f"${value:,.2f}"
 
 def timeformat(value):
-    return f"time.strftime('%A, %Y-%m-%d %H:%M:%S', time.localtime(value))"
+    return time.strftime('%A, %Y-%m-%d %H:%M:%S', time.localtime(value))
