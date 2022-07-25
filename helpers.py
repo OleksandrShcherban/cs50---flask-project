@@ -6,7 +6,7 @@ import time
 
 from flask import redirect, render_template, request, session
 from functools import wraps
-from datetime import datetime, strftime
+from datetime import datetime
 
 def apology(message, code=400):
     """Render message as an apology to user."""
