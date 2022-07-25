@@ -67,14 +67,4 @@ def usd(value):
     return f"${value:,.2f}"
 
 def timeformat(value):
-    print("==============================")
-    t = (2009, 2, 17, 17, 3, 38, 1, 48, 0)
-    t = time.mktime(t)
-    print(t)
-    print(value)
-    print (time.strftime("%b %d %Y %H:%M:%S", (t)))
-    print (time.strftime("%b %d %Y %H:%M:%S", (value)))
-    print (time.strftime("%b %d %Y %H:%M:%S", time.gmtime(t)))
-    print (time.strftime("%b %d %Y %H:%M:%S", time.gmtime(value)))
-    return time.strftime("%b %d %Y %H:%M:%S", time.gmtime(t))
-    # time.strftime('%A, %Y-%m-%d %H:%M:%S', value)
+    return value[0:10]
