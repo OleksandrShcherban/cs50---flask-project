@@ -6,7 +6,7 @@ import time
 
 from flask import redirect, render_template, request, session
 from functools import wraps
-from datetime import date
+from datetime import datetime, strftime
 
 def apology(message, code=400):
     """Render message as an apology to user."""
@@ -68,4 +68,4 @@ def usd(value):
     return f"${value:,.2f}"
 
 def timeformat(value):
-    return date.isoformat(value)
+    return value.strftime("%m/%d/%Y, %H:%M:%S")
