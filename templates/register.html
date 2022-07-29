@@ -7,13 +7,13 @@
 {% block main %}
     <form action="/register" method="post">
         <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text" pattern="[0-9a-zA-Z]{6,}">Latin alphabet and digits only at least 6 symbols
         </div>
         <div class="mb-3">
-            <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
+            <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">At least one number and one uppercase and lowercase letter, and at least 8 or more characters
         </div>
         <div class="mb-3">
-            <input class="form-control mx-auto w-auto" id="password" name="confirmation" placeholder="Password (again)" type="password">
+            <input class="form-control mx-auto w-auto" id="password" name="confirmation" placeholder="Password (again)" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">Repeat the above password to ensure correctness
         </div>
         <button class="btn btn-primary" type="submit">Register</button>
     </form>

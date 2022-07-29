@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    News
+{% endblock %}
+
+{% block main %}
+
+<form action="/news" method="post">
+    <div class="mb-3">
+        <input class="form-check-input" name="category" type="radio" id="newsGeneral" value="general">
+        <label class="form-check-label" for="newsGeneral">&nbsp;General</label>&nbsp;&nbsp;&nbsp;
+        <input class="form-check-input" name="category" type="radio" id="newsBuisness" value="buisness">
+        <label class="form-check-label" for="newsBuisness">&nbsp;Buisness</label>&nbsp;&nbsp;&nbsp;<br>
+        <input class="form-check-input" name="category"  type="radio" id="newsEntertainment" value="entertainment">
+        <label class="form-check-label" for="newsEntertainment">&nbsp;Entertainment</label>&nbsp;&nbsp;&nbsp;
+        <input class="form-check-input" name="category" type="radio" id="newsHealth" value="health">
+        <label class="form-check-label" for="newsHealth">&nbsp;Health</label>&nbsp;&nbsp;&nbsp;
+        <input class="form-check-input" name="category" type="radio" id="newsScience" value="science">
+        <label class="form-check-label" for="newsScience">&nbsp;Science</label>&nbsp;&nbsp;&nbsp;<br>
+        <input class="form-check-input" name="category"  type="radio" id="newsSports" value="sports">
+        <label class="form-check-label" for="newsSports">&nbsp;Sports</label>&nbsp;&nbsp;&nbsp;
+        <input class="form-check-input" name="category" type="radio" id="newsTechnology" value="technology">
+        <label class="form-check-label" for="newsTechnology">&nbsp;Technology</label>
+    </div>
+    <button class="btn btn-primary" type="submit">Add News category</button>
+</form>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td class="text-start news-output"> </td>
+                    <td class="text-start news-output">Please select category of your interest above</td>
+                    <td class="text-end news-output"> </td>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td class="border-0 fw-bold text-end" colspan="2">Your info-lines credit:</td>
+                    <td class="border-0 w-bold text-end">{{ credit }}</td>
+                </tr>
+            </tfoot>
+        </table>
+
+{% endblock %}

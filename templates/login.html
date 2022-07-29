@@ -7,10 +7,15 @@
 {% block main %}
         <form action="/login" method="post">
             <div class="mb-3">
-                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text">
+                This project is created by Oleksandr Shcherban in scope of CS50 remote course of Harvard University / under SoftServe supervision and mentoring<br>
+                You may find it usefull as a start page for your browser or as an info-screen for keeping watching some information.<br>
+                Please login below<br>
             </div>
             <div class="mb-3">
-                <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
+                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text" pattern="[0-9a-zA-Z]{6,}">
+            </div>
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
             </div>
             <button class="btn btn-primary" type="submit">Log In</button>
         </form>

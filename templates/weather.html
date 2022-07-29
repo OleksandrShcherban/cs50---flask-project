@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Weather
+{% endblock %}
+
+{% block main %}
+
+<form action="/weather" method="post">
+    <div class="mb-3">
+        <input autocomplete="off" autofocus="" class="form-control mx-auto w-auto" name="city" placeholder="City"
+            type="text">
+    </div>
+    <button class="btn btn-primary" type="submit">Add weather to INFOpage</button>
+</form>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-start">City</th>
+                    <th class="text-start">Weather</th>
+                    <th class="text-end">Temperature</th>
+                    <th class="text-end">Clouds</th>
+                    <th class="text-end">Wind</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-start weather-output"> </td>
+                    <td class="text-start weather-output">Please type city in above form to check availability, e.g. Kyiv or Odesa</td>
+                    <td class="text-end weather-output"> </td>
+                    <td class="text-end weather-output"> </td>
+                    <td class="text-end weather-output"> </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="border-0 fw-bold text-end" colspan="4">Your info-lines credit:</td>
+                    <td class="border-0 w-bold text-end">{{ credit }}</td>
+                </tr>
+            </tfoot>
+        </table>
+
+    <script>
+        let search = document.querySelector('input');
+        search.addEventListener('input', function () {
+            let city = search.value;
+            outputs = document.querySelectorAll('.weather-output');
+            outputs[0].innerHTML = "...";
+            outputs[1].innerHTML = "...Searching...";
+            outputs[2].innerHTML = "...";
+            outputs[3].innerHTML = "...";
+            outputs[4].innerHTML = "...";
+            fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=890af9ff7986d6f9b72c5fe1cee18186")
+                .then(function (response) {
+                    if (response.status == 200) return response.json();
+                    else return "0"
+                }).then(function (data) {
+                    if (data != 0) {
+                        outputs[0].innerHTML = data.name;
+                        outputs[1].innerHTML = data.weather[0].description;
+                        outputs[2].innerHTML = Math.round(data.main.temp - 273.15) + " °C";
+                        outputs[3].innerHTML = data.clouds.all + " %";
+                        outputs[4].innerHTML = data.wind.speed
+                        if (data.wind.gust > 0) outputs[4].innerHTML += " ~ " + data.wind.gust + " m/s";
+                        else outputs[4].innerHTML += " m/s"
+                    } else outputs[1].innerHTML = "Not found. Try another city, e.g. Lviv or Ivano-Frankivsk";
+                }).catch(function () {
+                });
+        });
+    </script>
+{% endblock %}

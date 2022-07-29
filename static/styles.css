@@ -1,23 +1,67 @@
 /* Size for brand */
-nav .navbar-brand
-{
+nav .navbar-brand {
     font-size: xx-large;
 }
 
 /* Colors for brand */
-nav .navbar-brand .blue
-{
+nav .navbar-brand .blue {
     color: #537fbe;
 }
-nav .navbar-brand .red
-{
+
+nav .navbar-brand .red {
     color: #ea433b;
 }
-nav .navbar-brand .yellow
-{
+
+nav .navbar-brand .yellow {
     color: #f5b82e;
 }
-nav .navbar-brand .green
-{
+
+nav .navbar-brand .green {
     color: #2e944b;
+}
+
+.theme-light {
+    --color-primary: #f7f7f7;
+    --color-secondary: #ffffff;
+    --button-color: #000000;
+    --font-color: #000000;
+    --row-color: rgba(0, 0, 0, 0.1);
+}
+
+.theme-dark {
+    --color-primary: #222222;
+    --color-secondary: #000000;
+    --button-color: #ffffff;
+    --font-color: #ffffff;
+    --row-color: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    background: var(--color-primary);
+    color: var(--font-color);
+}
+
+.table {
+    color: var(--font-color) !important;
+    --bs-table-striped-color: var(--font-color);
+    --bs-table-striped-bg: var(--row-color);
+}
+
+.navbar,
+footer {
+    background: var(--color-secondary);
+}
+
+#switch {
+    background: #777777;
+    color: var(--button-color);
+}
+
+.navbar-toggler {
+    background: #777777;
+    color: var(--button-color);
+}
+
+.delete:hover {
+    background: red;
 }

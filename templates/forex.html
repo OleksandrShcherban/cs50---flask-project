@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Exchange rates
+{% endblock %}
+
+{% block main %}
+
+<form action="/forex" method="post">
+    <div class="mb-3">
+        <select class="form-select mx-auto w-auto" aria-label="from" name="from">
+            <option selected>Select from</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="JPY">JPY</option>
+            <option value="GBP">GBP</option>
+            <option value="UAH">UAH</option>
+            <option value="CAD">CAD</option>
+            <option value="AUD">AUD</option>
+            <option value="CHF">CHF</option>
+            <option value="CNH">CNH</option>
+            <option value="HKD">HKD</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <select class="form-select mx-auto w-auto" aria-label="to" name="to">
+            <option selected>Select to</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="JPY">JPY</option>
+            <option value="GBP">GBP</option>
+            <option value="UAH">UAH</option>
+            <option value="CAD">CAD</option>
+            <option value="AUD">AUD</option>
+            <option value="CHF">CHF</option>
+            <option value="CNH">CNH</option>
+            <option value="HKD">HKD</option>
+        </select>
+    </div>
+    <button class="btn btn-primary" type="submit">Add pair to INFOpage</button>
+</form>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-start">From</th>
+                    <th class="text-start">To</th>
+                    <th class="text-end">Rate</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-start forex-output"> Select above </td>
+                    <td class="text-start forex-output"> Select above </td>
+                    <td class="text-end forex-output"> Select above </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="border-0 fw-bold text-end" colspan="2">Your info-lines credit:</td>
+                    <td class="border-0 w-bold text-end">{{ credit }}</td>
+                </tr>
+            </tfoot>
+        </table>
+
+    <script>
+        let search = document.querySelectorAll('select');
+        for (let i = 0; i <=1; i++) {
+            search[i].addEventListener('input', function () {
+            if (search[0].value.length > 3) search[0].value = 'USD';
+            if (search[1].value.length > 3) search[1].value = 'USD';
+            if (search[0].value == search[1].value) {
+                if (search[0].value == 'USD') search[1].value = 'EUR';
+                else search[1].value = 'USD';
+                }
+            let pair = "" + search[0].value + search[1].value;
+            outputs = document.querySelectorAll('.forex-output');
+            outputs[0].innerHTML = "...";
+            outputs[1].innerHTML = "...Searching...";
+            outputs[2].innerHTML = "...";
+            fetch("https://api.polygon.io/v2/aggs/ticker/C:" + pair + "/prev?adjusted=true&apiKey=Xxp5786uyvAhyP_WbFpZ_7ncFzIiAd1b")
+                .then(function (response) {
+                    if (response.status == 200) return response.json();
+                    else return "0"
+                }).then(function (data) {
+                    if (data != 0) {
+                        if (data.resultsCount != 0){
+                            outputs[0].innerHTML = search[0].value;
+                            outputs[1].innerHTML = search[1].value;
+                            outputs[2].innerHTML = data.results[0]["c"];
+                        } else outputs[1].innerHTML = "Looks like no such pair exists. Try another combination please"
+                    } else outputs[1].innerHTML = "To many requests... Try after 1 minute please";
+                }).catch(function () {
+                });
+            });
+        }
+    </script>
+{% endblock %}

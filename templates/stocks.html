@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Stocks
+{% endblock %}
+
+{% block main %}
+
+<form action="/stocks" method="post">
+    <div class="mb-3">
+        <input autocomplete="off" autofocus="" class="form-control mx-auto w-auto" name="symbol" placeholder="Symbol"
+            type="text" pattern="[0-9a-zA-Z]+">
+    </div>
+    <button class="btn btn-primary" type="submit">Add stock to INFOpage</button>
+</form>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-start">Symbol</th>
+                    <th class="text-start">Name</th>
+                    <th class="text-end">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-start stock-output"> </td>
+                    <td class="text-start stock-output">Please type symbol in above form to quote it, e.g. AAA or QQQ</td>
+                    <td class="text-end stock-output"> </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="border-0 fw-bold text-end" colspan="2">Your info-lines credit:</td>
+                    <td class="border-0 w-bold text-end">{{ credit }}</td>
+                </tr>
+            </tfoot>
+        </table>
+
+    <script>
+        let search = document.querySelector('input');
+        search.addEventListener('input', function() {
+        let symbol = search.value;
+        outputs = document.querySelectorAll('.stock-output');
+        outputs[0].innerHTML = "...";
+        outputs[1].innerHTML = "...Searching...";
+        outputs[2].innerHTML = "...";
+        fetch("https://cloud.iexapis.com/stable/stock/" + symbol + "/quote?token=pk_ae98cd1be43345d7b1be7e51ccafefad")
+            .then(function (response) {
+                if (response.status == 200) return response.json();
+                else return "0"
+            }).then(function (data) {
+                if (data != 0) {
+                    outputs[0].innerHTML = data.symbol;
+                    outputs[1].innerHTML = data.companyName;
+                    outputs[2].innerHTML = data.latestPrice;
+                } else outputs[1].innerHTML = "Not found. Try another symbol, e. g. TTT or NNN";
+            }).catch(function () {
+            });
+        });
+    </script>
+{% endblock %}
