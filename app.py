@@ -33,6 +33,7 @@ def after_request(response):
 @app.route("/")
 @login_required
 def index():
+    print("HELLO==============================")
     credit = db.execute("SELECT credit FROM users WHERE id = (?)", session["user_id"])[0]['credit']
     stocks = db.execute("SELECT symbol, id FROM stocks WHERE user_id = (?) ORDER BY symbol", session["user_id"])
     pairs = db.execute("SELECT pair, id FROM forex WHERE user_id = (?) ORDER BY pair", session["user_id"])
