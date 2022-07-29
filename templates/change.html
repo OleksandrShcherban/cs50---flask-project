@@ -13,10 +13,10 @@
             <input class="form-control mx-auto w-auto" id="password" name="old" placeholder="Old password" type="password">
         </div>
         <div class="mb-3">
-            <input class="form-control mx-auto w-auto" id="password" name="new" placeholder="New password" type="password">
+            <input class="form-control mx-auto w-auto" id="password" name="new" placeholder="New password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">At least one number and one uppercase and lowercase letter, and at least 8 or more characters
         </div>
         <div class="mb-3">
-            <input class="form-control mx-auto w-auto" id="password" name="confirmation" placeholder="New password (again)" type="password">
+            <input class="form-control mx-auto w-auto" id="password" name="confirmation" placeholder="New password (again)" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">Repeat the above password to ensure correctness
         </div>
         <button class="btn btn-primary" type="submit">Change password</button>
     </form>
