@@ -160,7 +160,7 @@ def delStock():
         id = request.form.get("id")
         credit = db.execute(
             "SELECT credit FROM users WHERE id = (?)", session["user_id"])[0]['credit']
-        db.execute("DELETE FROM stocks WHERE id = (?) LIMIT 1", id)
+        db.execute("DELETE FROM stocks WHERE id = (?)", id)
         credit += 1
         db.execute("UPDATE users SET credit = (?) WHERE id = (?)",
                    credit, session["user_id"])
@@ -201,7 +201,7 @@ def delForex():
     if request.method == "POST":
         id = request.form.get("id")
         credit = db.execute("SELECT credit FROM users WHERE id = (?)", session["user_id"])[0]['credit']
-        db.execute("DELETE FROM forex WHERE id = (?) LIMIT 1", id)
+        db.execute("DELETE FROM forex WHERE id = (?)", id)
         credit += 1
         db.execute("UPDATE users SET credit = (?) WHERE id = (?)", credit, session["user_id"])
         flash('Exchange-rate pair deleted')
@@ -242,7 +242,7 @@ def delWeather():
         id = request.form.get("id")
         credit = db.execute(
             "SELECT credit FROM users WHERE id = (?)", session["user_id"])[0]['credit']
-        db.execute("DELETE FROM weather WHERE id = (?) LIMIT 1", id)
+        db.execute("DELETE FROM weather WHERE id = (?)", id)
         credit += 1
         db.execute("UPDATE users SET credit = (?) WHERE id = (?)",
                    credit, session["user_id"])
@@ -275,7 +275,7 @@ def delNews():
     if request.method == "POST":
         id = request.form.get("id")
         credit = db.execute("SELECT credit FROM users WHERE id = (?)", session["user_id"])[0]['credit']
-        db.execute("DELETE FROM news WHERE id = (?) LIMIT 1", id)
+        db.execute("DELETE FROM news WHERE id = (?)", id)
         credit += 1
         db.execute("UPDATE users SET credit = (?) WHERE id = (?)", credit, session["user_id"])
         flash('News line deleted')
